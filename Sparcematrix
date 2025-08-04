@@ -67,13 +67,11 @@ void printMatrix(int matrix[MAX][3], int rows) {
     }
 }
 
-// Function to transpose a sparse matrix
 void transposeSparseMatrix(int matrix[MAX][3], int *rows) {
     int i;
     int transposed[MAX][3];
     int k = 0;
 
-    // Transposing the sparse matrix (swap rows and columns)
     for (i = 0; i < *rows; i++) {
         transposed[k][0] = matrix[i][1];  // Swap row and column
         transposed[k][1] = matrix[i][0];  // Swap row and column
@@ -81,32 +79,28 @@ void transposeSparseMatrix(int matrix[MAX][3], int *rows) {
         k++;
     }
 
-    // Copy the transposed matrix back to the original matrix
+    
     for (i = 0; i < k; i++) {
         matrix[i][0] = transposed[i][0];
         matrix[i][1] = transposed[i][1];
         matrix[i][2] = transposed[i][2];
     }
 
-    *rows = k;  // Update the number of rows (non-zero elements)
+    *rows = k; 
 }
 
 int main() {
     int matrix1[MAX][3], matrix2[MAX][3], result[MAX][3];
     int rows1, rows2;
-
-    // Input the first matrix
     printf("Enter details for the first sparse matrix:\n");
     inputMatrix(matrix1, &rows1);
-
-    // Input the second matrix
     printf("\nEnter details for the second sparse matrix:\n");
     inputMatrix(matrix2, &rows2);
 
-    // Add the two matrices
+  
     addSparseMatrices(matrix1, matrix2, result, &rows1, &rows2);
 
-    // Print the result of the addition
+   
     printf("\nResultant Sparse Matrix after Addition:\n");
     printMatrix(result, rows1);
     printf("\nTransposing the Resultant Sparse Matrix:\n");

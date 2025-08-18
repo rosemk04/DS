@@ -17,7 +17,7 @@ void enqueue(int value) {
         printf("Queue is full! Cannot enqueue %d.\n", value);
         return;
     }
-    if (front == -1) {  // If queue is empty
+    if (front == -1) {  
         front = rear = 0;
     } else {
         rear = (rear + 1) % MAX_SIZE;
@@ -32,7 +32,7 @@ void dequeue() {
         return;
     }
     printf("Dequeued %d.\n", queue[front]);
-    if (front == rear) {  // Only one element in queue
+    if (front == rear) { 
         front = rear = -1;
     } else {
         front = (front + 1) % MAX_SIZE;

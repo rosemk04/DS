@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+struct Term {
+    int coeff;
+    int exp;
+};
+
+int main() {
+    struct Term P1[20], P2[20], Result[40];
+    int n1, n2, i, j, k = 0;
+
+    printf("Enter number of terms in first polynomial: ");
+    scanf("%d", &n1);
+    printf("Enter coefficient and exponent for each term of P1:\n");
+    for(i = 0; i < n1; i++) {
+        printf("Term %d (coeff exp): ", i + 1);
+        scanf("%d %d", &P1[i].coeff, &P1[i].exp);
+    }
+
+    printf("Enter number of terms in second polynomial: ");
+    scanf("%d", &n2);
+    printf("Enter coefficient and exponent for each term of P2:\n");
+    for(i = 0; i < n2; i++) {
+        printf("Term %d (coeff exp): ", i + 1);
+        scanf("%d %d", &P2[i].coeff, &P2[i].exp);
+    }
+
+    i = 0; 
+    j = 0;
+    while(i < n1 && j < n2) {
+        if(P1[i].exp == P2[j].exp) {
+            Result[k].coeff = P1[i].coeff + P2[j].coeff;
+            Result[k].exp = P1[i].exp;
+            i++; j++; k++;
+        }
+        else if(P1[i].exp > P2[j].exp) {
+            Result[k] = P1[i];
+            i++; k++;
+        }
+        else {
+            Result[k] = P2[j];
+            j++; k++;
+        }
+    }
+
+    while(i < n1) {
+        Result[k] = P1[i];
+        i++; k++;
+    }
+
+    while(j < n2) {
+        Result[k] = P2[j];
+        j++; k++;
+    }
+
+    printf("\nResultant Polynomial: ");
+    for(i = 0; i < k; i++) {
+        printf("%dx^%d", Result[i].coeff, Result[i].exp);
+        if(i < k - 1)
+            printf(" + ");
+    }
+    printf("\n");
+
+    return 0;
+}

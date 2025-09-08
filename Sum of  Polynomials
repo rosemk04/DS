@@ -11,17 +11,15 @@ int main() {
 
     printf("Enter number of terms in first polynomial: ");
     scanf("%d", &n1);
-    printf("Enter coefficient and exponent for each term of P1:\n");
-    for(i = 0; i < n1; i++) {
-        printf("Term %d (coeff exp): ", i + 1);
+    printf("Enter coefficient and exponent for term %d: ", i++); {
+        printf("Term %d: ", i + 1);
         scanf("%d %d", &P1[i].coeff, &P1[i].exp);
     }
 
     printf("Enter number of terms in second polynomial: ");
     scanf("%d", &n2);
-    printf("Enter coefficient and exponent for each term of P2:\n");
-    for(i = 0; i < n2; i++) {
-        printf("Term %d (coeff exp): ", i + 1);
+    printf("Enter coefficient and exponent for term %d: ", i++); {
+        printf("Term %d : ", i + 1);
         scanf("%d %d", &P2[i].coeff, &P2[i].exp);
     }
 

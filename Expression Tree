@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+struct Node {
+    char data;
+    struct Node *left, *right;
+};
+
+// Stack for storing tree nodes
+struct Node* stack[100];
+int top = -1;
+
+void push(struct Node* node) {
+    stack[++top] = node;
+}
+
+struct Node* pop() {
+    return stack[top--];
+}
+
+// Create a new node
+struct Node* newNode(char c) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = c;
+    node->left = node->right = NULL;
+    return node;
+}
+
+struct Node* buildTree(char* postfix) {
+    for (int i = 0; postfix[i] != '\0'; i++) {
+        char c = postfix[i];
+
+        if (isalnum(c)) {
+            // Operand → just create a node and push
+            push(newNode(c));
+        } else {
+            // Operator → pop 2 nodes, make them children
+            struct Node* node = newNode(c);
+            struct Node* right = pop();
+            struct Node* left = pop();
+            node->left = left;
+            node->right = right;
+            push(node);
+        }
+    }
+    return pop(); // Root of tree
+}
+void preorder(struct Node* root) { // Prefix
+    if (root == NULL) return;
+    printf("%c", root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(struct Node* root) { // Postfix
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%c", root->data);
+}
+int main() {
+    char postfix[100];
+
+    printf("Enter postfix expression: ");
+    scanf("%s", postfix);
+
+    // Step 1: Build Expression Tree
+    struct Node* root = buildTree(postfix);
+
+    // Step 2: Traversals
+    printf("Prefix Expression : ");
+    preorder(root);
+    printf("\n");
+
+    printf("Postfix Expression: ");
+    postorder(root);
+    printf("\n");
+
+    return 0;
+}

@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <time.h>
+
+int binarySearch(int arr[], int n, int key) {
+    int low = 0, high = n - 1;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;  
+
+        if (arr[mid] == key)
+            return mid;  
+        else if (arr[mid] < key)
+            low = mid + 1;  
+        else
+            high = mid - 1;  
+    }
+    return -1;  
+}
+
+int main() {
+    int n, key;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d sorted elements: ", n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    printf("Enter key to search: ");
+    scanf("%d", &key);
+
+    clock_t start_time = clock();  // Start time
+
+    int result = binarySearch(arr, n, key);
+
+    clock_t end_time = clock();    // End time
+
+    double time_taken = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+
+    if (result != -1)
+        printf("Key %d found at index %d\n", key, result);
+    else
+        printf("Key %d not found\n", key);
+
+    printf("Time taken by binary search: %f seconds\n", time_taken);
+
+    return 0;
+}
